@@ -118,7 +118,7 @@ const TicketList: FunctionComponent<TicketsListProps> = () => {
                         {filteredTickets.map((ticket) => (
                             <Grid
                                 key={ticket.id}
-                                size={{ xs: 12, sm: 6, md: 4 }} // במקום xs={12} וכו'
+                                size={{ xs: 12, sm: 6, md: 4 }} 
                                 sx={{ display: 'flex', justifyContent: 'center' }}
                             >
                                 <Box sx={{ width: '100%', maxWidth: '380px', display: 'flex' }}>

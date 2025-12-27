@@ -19,10 +19,10 @@ const TicketDetailsDrawer: FunctionComponent<TicketDetailsDrawerProps> = () => {
     const navigate = useNavigate();
     const ticket = useLoaderData();
     const revalidator = useRevalidator();
-    const { isProcessing,setIsProcessing } = useAuth();
+    const { isProcessing, setIsProcessing } = useAuth();
     const isAdmin = user?.role === 'admin'
+    const isClosed = ticket.status_name === 'closed';
 
-    const customFont = "'Assistant', sans-serif";
 
     if (!ticket) return null;
 
@@ -67,7 +67,6 @@ const TicketDetailsDrawer: FunctionComponent<TicketDetailsDrawerProps> = () => {
                     width: { xs: '100%', sm: 450 },
                     display: 'flex',
                     flexDirection: 'column',
-                    fontFamily: customFont,
                     borderTopRightRadius: '20px',
                     borderBottomRightRadius: '20px',
                 }
@@ -78,23 +77,23 @@ const TicketDetailsDrawer: FunctionComponent<TicketDetailsDrawerProps> = () => {
 
                     {/* כותרת - קבועה למעלה */}
                     <Box sx={{ p: 3, bgcolor: '#f8f9fa', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #eee' }}>
-                        <Typography variant="h6" sx={{ fontFamily: customFont, fontWeight: 800 }}>
-                            פרטי פנייה #{ticket.id} 
+                        <Typography variant="h6" sx={{ fontWeight: 800 }}>
+                            פרטי פנייה #{ticket.id}
                         </Typography>
                         <IconButton onClick={handleClose} size="small"><CloseIcon /></IconButton>
                     </Box>
 
                     {/* תוכן ותגובות - אזור נגלל */}
                     <Box sx={{ p: 3, flexGrow: 1, overflowY: 'auto', bgcolor: '#fff' }}>
-                        <Typography variant="subtitle1" sx={{ fontFamily: customFont, fontWeight: 700, mb: 1 }}>
+                        <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>
                             {ticket.subject}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 3, fontFamily: customFont }}>
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
                             {ticket.description}
                         </Typography>
 
                         <Divider sx={{ my: 2 }}>
-                            <Chip label="שיחת צ'אט" size="small" sx={{ fontFamily: customFont, fontSize: '0.75rem' }} />
+                            <Chip label="שיחת צ'אט" size="small" sx={{ fontSize: '0.75rem' }} />
                         </Divider>
 
                         <Stack spacing={2} sx={{ mt: 2 }}>
@@ -116,12 +115,12 @@ const TicketDetailsDrawer: FunctionComponent<TicketDetailsDrawerProps> = () => {
                                             }}
                                         >
                                             {!isMe && (
-                                                <Typography variant="caption" sx={{ fontWeight: 800, display: 'block', mb: 0.5, fontFamily: customFont, color: '#1a73e8' }}>
+                                                <Typography variant="caption" sx={{ fontWeight: 800, display: 'block', mb: 0.5, color: '#1a73e8' }}>
                                                     {comment.author_name}
                                                 </Typography>
                                             )}
 
-                                            <Typography variant="body2" sx={{ fontFamily: customFont, whiteSpace: 'pre-wrap' }}>
+                                            <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>
                                                 {comment.content}
                                             </Typography>
 
@@ -133,7 +132,6 @@ const TicketDetailsDrawer: FunctionComponent<TicketDetailsDrawerProps> = () => {
                                                     mt: 1,
                                                     textAlign: 'left',
                                                     fontSize: '0.65rem',
-                                                    fontFamily: customFont
                                                 }}
                                             >
                                                 {comment.created_at ? (() => {
@@ -150,7 +148,7 @@ const TicketDetailsDrawer: FunctionComponent<TicketDetailsDrawerProps> = () => {
                                     );
                                 })
                             ) : (
-                                <Typography sx={{ textAlign: 'center', color: 'text.disabled', mt: 4, fontFamily: customFont }}>
+                                <Typography sx={{ textAlign: 'center', color: 'text.disabled', mt: 4 }}>
                                     אין עדיין תגובות בטיקט זה.
                                 </Typography>
                             )}
@@ -163,7 +161,7 @@ const TicketDetailsDrawer: FunctionComponent<TicketDetailsDrawerProps> = () => {
                     </Box>
 
                     {/* אזור ה-Input רק לסוכן ולקוח*/}
-                    {!isAdmin && (
+                    {!isAdmin && !isClosed && (
                         <Box sx={{ p: 2, bgcolor: '#fff', borderTop: '1px solid #eee', boxShadow: '0 -2px 10px rgba(0,0,0,0.03)' }}>
                             <Stack direction="row" spacing={1} alignItems="center">
                                 <TextField
@@ -175,7 +173,6 @@ const TicketDetailsDrawer: FunctionComponent<TicketDetailsDrawerProps> = () => {
                                     onChange={(e) => setCommentText(e.target.value)}
                                     sx={{
                                         '& .MuiOutlinedInput-root': { borderRadius: '15px', bgcolor: '#f8f9fa' },
-                                        '& .MuiInputBase-input': { fontFamily: customFont }
                                     }}
                                 />
                                 <Button

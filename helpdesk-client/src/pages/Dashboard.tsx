@@ -9,7 +9,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import Header from "../components/Header";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
-import SettingsIcon from '@mui/icons-material/Settings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddIcon from '@mui/icons-material/Add';
 import { TicketsChart } from "../components/TicketsChart";
@@ -225,10 +224,6 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
                                         '&.Mui-selected': { bgcolor: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8' }
                                     }}
                                 >
-                                    <ListItemIcon sx={{ color: 'white', minWidth: '45px' }}>
-                                        <SettingsIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary={<Typography sx={{ fontWeight: 600 }}>הגדרות</Typography>} />
                                 </ListItemButton>
                             </ListItem>
                         </>
