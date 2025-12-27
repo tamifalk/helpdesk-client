@@ -20,7 +20,7 @@ Helpdesk Client is a React-based web application designed to manage tickets, use
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/helpdesk-client.git
+   git clone https://github.com/tamifalk/helpdesk-client.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -37,7 +37,7 @@ Start the development server:
 npm run dev
 ```
 
-The application will be available at `http://localhost:3000`.
+The application will be available at `http://localhost:5173`.
 
 ## Project Structure
 ```
@@ -64,4 +64,4 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 This project is licensed under the MIT License.
 
 ## Contact
-For questions or support, please contact [your-email@example.com](mailto:your-email@example.com).
+For questions or support, please contact t6795087@gmail.com
